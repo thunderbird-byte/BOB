@@ -1,0 +1,85 @@
+<html lang="en"><head></head><body><p style="text-align: center; font-size: 3em; font-family: Impact , sans;">This is BOB have a good time with BOB</p>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML preview</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: red;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+
+
+    <script>
+        const ball = document.createElement('div');
+        ball.className = 'ball';
+        document.body.appendChild(ball);
+
+        let posX = Math.random() * window.innerWidth;
+        let posY = Math.random() * window.innerHeight;
+        let dirX = (Math.random() - 0.5) * 2;
+        let dirY = (Math.random() - 0.5) * 2;
+
+        function animate() {
+            posX += dirX * 5;
+            posY += dirY * 5;
+
+            if (posX < 0 || posX > window.innerWidth - 50) dirX *= -1;
+            if (posY < 0 || posY > window.innerHeight - 50) dirY *= -1;
+
+            ball.style.left = posX + 'px';
+            ball.style.top = posY + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        document.addEventListener('mousemove', (event) => {
+            dirX = (event.clientX - posX) / 100;
+            dirY = (event.clientY - posY) / 100;
+        });
+
+        setInterval(() => {
+            const clone = ball.cloneNode();
+            clone.style.opacity = 0.5;
+            clone.style.transition = 'opacity 0.5s';
+            document.body.appendChild(clone);
+            setTimeout(() => {
+                clone.style.opacity = 0;
+                setTimeout(() => clone.remove(), 500);
+            }, 0);
+        }, 100);
+
+        setInterval(() => {
+            ball.style.transition = 'opacity 1s';
+            ball.style.opacity = 0;
+            setTimeout(() => {
+                ball.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                ball.style.opacity = 1;
+            }, 1000);
+        }, 10000);
+
+        animate();
+    </script><div class="ball" style="left: 528.206px; top: 625.97px; transition: opacity 1s; opacity: 1; background-color: rgb(221, 144, 38);"></div>
+
+
+<div class="ball" style="left: 311.197px; top: 693.293px; transition: opacity 0.5s; opacity: 0; background-color: rgb(221, 144, 38);"></div><div class="ball" style="left: 379.726px; top: 679.364px; transition: opacity 0.5s; opacity: 0; background-color: rgb(221, 144, 38);"></div><div class="ball" style="left: 448.255px; top: 665.435px; transition: opacity 0.5s; opacity: 0; background-color: rgb(221, 144, 38);"></div><div class="ball" style="left: 516.785px; top: 651.507px; transition: opacity 0.5s; opacity: 0; background-color: rgb(221, 144, 38);"></div><div class="ball" style="left: 585.314px; top: 637.578px; transition: opacity 0.5s; opacity: 0; background-color: rgb(221, 144, 38);"></div></body></html>
